@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
@@ -6,7 +7,9 @@ function LandingPage() {
       <div>
         <h1>Welcome to the Trivia App!</h1>
         <p>Instructions: ...</p>
-        <button>Start Game</button>
+        <Link to={"/question"}>
+          <button>Start Game</button>
+        </Link>
       </div>
     </>
   );
