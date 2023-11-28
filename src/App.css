@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Lora:wght@400;600&family=Mulish:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Lora:wght@400;600&family=Mulish:ital,wght@0,200;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Lora:wght@400;600&family=Mulish:ital,wght@0,200;1,500&family=Nova+Square&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgba(0, 61, 63, 0.979);
+}
+
+.land-div {
+  width: 70%;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: linear-gradient(
+    to top,
+    rgba(2, 97, 81, 0.979),
+    rgb(83, 248, 221)
+  );
+  gap: 2rem;
+  padding: 3rem 1rem;
+
+  .h1 {
+    font-family: "Nova Square", sans-serif;
+    font-size: 4rem;
+    letter-spacing: 0.9px;
+    background: linear-gradient(
+      90deg,
+      rgb(207, 207, 207) 0%,
+      rgba(58, 47, 47, 0.925) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+
+  .instruct {
+    .h3 {
+      font-family: "Nova Square", sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.9px;
+    }
+
+    .p {
+      font-size: "Inter", sans-serif;
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: 0.1rem;
+    }
+  }
+
+  .btn {
+    width: 8rem;
+    height: 3.5rem;
+    border: 2px solid #420000;
+    border-radius: 0.4rem;
+    background: #035a5a;
+    color: azure;
+  }
+}
+
+.quest-page {
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  gap: 2rem;
+
+  .h1 {
+    font-family: "Nova Square", sans-serif;
+    font-size: 3rem;
+    letter-spacing: 0.9px;
+    background: linear-gradient(
+      90deg,
+      rgb(207, 207, 207) 0%,
+      rgba(58, 47, 47, 0.925) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* width: fit-content; */
+    text-align: center;
+  }
+
+  .submit {
+    width: 8rem;
+    height: 3.5rem;
+    border: 2px solid #002927;
+    border-radius: 0.4rem;
+    background: #00cfcf;
+    color: #002927;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .land-div {
+    width: 100%;
+    gap: 1.5rem;
+    padding: 3rem 1rem;
+    height: 100vh;
+
+    .h1 {
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .instruct {
+      .h3 {
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      .p {
+        font-size: 1rem;
+        color: #fff;
+      }
+    }
+  }
+}
