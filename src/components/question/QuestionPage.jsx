@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
+// QuestionPage.js
 
-function QuestionPage() {
-  // let amount = 1;
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+
+function QuestionPage({ handleAnswerSubmit }) {
   const urlApi =
     "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
 
@@ -15,51 +16,74 @@ function QuestionPage() {
       return data;
     },
   });
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-  console.log(data);
+
+  const questions = data.results;
+  const question = questions[currentQuestionIndex];
+
+  const handleTrue = () => {
+    setUserAnswers([
+      ...userAnswers,
+      { question: question.question, answer: "True" },
+    ]);
+    moveToNextQuestion();
+  };
+
+  const handleFalse = () => {
+    setUserAnswers([
+      ...userAnswers,
+      { question: question.question, answer: "False" },
+    ]);
+    moveToNextQuestion();
+  };
+
+  const moveToNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      navigate("/results", { state: { userAnswers, questions } });
+    }
+  };
 
   return (
-    <>
-      <div className="quest-page">
-        <h1 className="h1">Please Answer All Quesions</h1>
-        <div className="questions">
-          {data ? (
-            <>
-              {data.results?.map((quest) => (
-                <div className="quest">
-                  <h5 className="h5">Difficulty: {quest.difficulty}</h5>
-                  <p className="p">{quest.question}</p>
-                  <div className="true-false">
-                    <button className="true">True</button>
-                    <button
-                      className="false"
-                      // onClick={() => {
-                      //   console.log(amount);
-                      //   amount++;
-                      // }}
-                    >
-                      False
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <div>Sorry And E rro Ocuured</div>
-          )}
-        </div>
-
-        <Link to={"/results"}>
-          {" "}
-          <button className="submit">Submit</button>
-        </Link>
+    <div
+      className="question-page"
+      style={{ background: "linear-gradient(to right, #3498db, #2c3e50)" }}
+    >
+      <div className="header">
+        <h1>Click either True or False</h1>
       </div>
-    </>
+      <div className="question-container">
+        <h3>Question {currentQuestionIndex + 1}</h3>
+        <p>{question?.question}</p>
+      </div>
+      <div className="true-false">
+        <button className="true" onClick={handleTrue}>
+          True
+        </button>
+        <button className="false" onClick={handleFalse}>
+          False
+        </button>
+      </div>
+      <div className="submit-btn">
+        {currentQuestionIndex === questions.length - 1 ? (
+          <button onClick={moveToNextQuestion}>Submit and View Results</button>
+        ) : (
+          <button onClick={moveToNextQuestion}>Next Question</button>
+        )}
+      </div>
+    </div>
   );
 }
 
